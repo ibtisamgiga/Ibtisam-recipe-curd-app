@@ -1,0 +1,53 @@
+
+<div class="update-blog content">
+    <%- console.log(blog.id,"******************8") -%>
+ <form action="/blogs/<%=blog.id%>" method="PUT" class="post-form">  
+
+    <!-- <form method="POST" action="/blogs/<%=blog.id%>?_method=PUT" class="post-form"> -->
+      <label for="title">Recipe Name:</label>
+      <input type="text" id="title" name="title" value="<%=blog.title%>" required>
+      <label for="snippet">Recipe tags:</label>
+      <input type="text" id="snippet" name="snippet" value="<%=blog.snippet%>" required>
+      <label for="body">Ingrideints:</label>
+      <textarea id="body" name="body" value="" required><%=blog.body%></textarea>
+
+      <label for="image">Recipe Image:</label>
+      <input type="text" id="title" name="imageUrl" value="<%=blog.imageUrl%>" required>
+
+      <input type="text" hidden="true" id="snippet" name="ownerId" value=<%=user.id%> required >
+      <input type="text" hidden="true" id="snippet" name="ownerEmail" value=<%=user.email%> required >
+      <%-console.log(user.id)-%>
+      
+      <button class="frm-btn"  data-doc="<%=blog.id%>">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const trashcan = document.querySelector('form');
+    console.log(trashcan,"*********************")
+
+    trashcan.addEventListener('submit', (e) => {
+    const endpoint = `/blogs/${trashcan.dataset.doc}`;
+    //if(user.id.toString()==blog.id){}
+    const obj={
+        title:trashcan.title.value,
+    }
+
+       fetch(endpoint, {
+         method: 'PUT',
+         body: JSON.stringify(obj)
+       })
+       .then(response => response.json())
+       .then(data => window.location.href = data.redirect)
+       .catch(err => console.log(err));
+ });
+    console.log(blog)
+
+  </script>
+  
+  </body>
+  <%- include('partials/footer'); -%>
+
+
+
+

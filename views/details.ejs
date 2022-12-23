@@ -1,0 +1,40 @@
+<%- include('partials/header'); -%>
+
+<body>
+    <div class="row">
+    <div class="recipe2">
+    <img src=<%=blog.imageUrl%> alt="smoothie recipe icon">
+        <h2><%= blog.title %></h2>
+          <p><%= blog.body %></p>
+          <%if(blog.ownerId ==user?.id.toString()){%>
+            <a class="delete" data-doc="<%= blog._id %>">delete</a>
+            <a class="update" href="/blogs/update/<%= blog._id %>">update</a> 
+
+            <% }%>
+
+      </div>
+    
+    </div>
+    
+      <script>
+        const trashcan = document.querySelector('a.delete');
+        console.log(trashcan,"*********************")
+    
+        trashcan.addEventListener('click', (e) => {
+        const endpoint = `/blogs/${trashcan.dataset.doc}`;
+        //if(user.id.toString()==blog.id){}
+    
+           fetch(endpoint, {
+             method: 'DELETE',
+           })
+           .then(response => response.json())
+           .then(data => window.location.href = data.redirect)
+           .catch(err => console.log(err));
+     });
+        console.log(blog)
+    
+      </script>
+    </body>
+
+
+  <%- include('partials/footer'); -%>

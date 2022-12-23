@@ -1,0 +1,25 @@
+<%- include('partials/header'); -%>
+
+<body>
+
+<div class="create-blog content">
+    <form action="/blogs" method="POST" class="post-form">
+      <label for="title">Recipe Name:</label>
+      <input type="text" id="title" name="title" required>
+      <label for="snippet">Recipe tags:</label>
+      <input type="text" id="snippet" name="snippet" required>
+      <label for="body">Ingrideints:</label>
+      <textarea id="body" name="body" required></textarea>
+
+      <label for="image">Recipe Image:</label>
+      <input type="text" id="title" name="imageUrl" value="https://media.istockphoto.com/id/1183223263/photo/homemade-chocolate-cake-milkshake.jpg?s=1024x1024&w=is&k=20&c=YeTv00O3hvaDiJoT6VLMxqqsTDTtqLIWGbjxm89LPmc=" required>
+
+      <input type="text" hidden="true" id="snippet" name="ownerId" value=<%=user.id%> required >
+      <input type="text" hidden="true" id="snippet" name="ownerEmail" value=<%=user.email%> required >
+      <%-console.log(user.id)-%>
+      
+      <button class="frm-btn">Submit</button>
+    </form>
+  </div>
+  </body>
+  <%- include('partials/footer'); -%>

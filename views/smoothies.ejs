@@ -1,0 +1,54 @@
+<%- include('partials/header'); -%>
+
+
+  <body>
+
+    <div class="blogs content">
+      <h2>My-Recipes</h2>
+
+      <ul class="recipes">
+        <% let a=[] %>
+          <% if (blogs.length> 0) { %>
+            <% blogs.forEach(blog=> { %>
+              <%-console.log(blog.ownerId)-%>
+                <%if(blog.ownerId==user.id.toString()){%>
+                  <%a.push(blog);%>
+
+                    <div class="recipe">
+                      <img src=<%=blog.imageUrl%> alt="smoothie recipe icon">
+                      <a class="single" href="/blogs/<%= blog._id %>">
+                        <h3 class="title">
+                          <%= blog.title %>
+                        </h3>
+                        <p class="snippet">
+                          <%= blog.snippet %>
+                        </p>
+                       
+                      </a>
+
+                      <a class="snippet" href="/user/details/<%= blog.ownerEmail %>">
+                        <span class="by">By:</span>
+                        <%= blog.ownerEmail %>
+                      </a>
+
+                    </div>
+
+
+
+
+                    <% }%>
+
+                      <% }) %>
+                        <% if (a.length==0) { %>
+                          <p>There are no Recipes to display...</p>
+                          <% } %>
+                            <% } %>
+
+      </ul>
+    </div>
+
+
+  </body>
+
+
+  <%- include('partials/footer'); -%>

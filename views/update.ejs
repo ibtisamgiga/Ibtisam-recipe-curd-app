@@ -1,0 +1,56 @@
+<%- include('partials/header'); -%>
+
+<body>
+
+<div class="update-blog content">
+    <!-- <%- console.log(blog.id,"******************8") -%> -->
+
+   <form> 
+    <!-- action="/blogs/<%=blog.id%>" -->
+    <!-- <form method="POST" action="/blogs/<%=blog.id%>?_method=PUT" class="post-form"> -->
+      <label for="title">Recipe Name:</label>
+      <input type="text" id="title" name="title"required value="<%=blog.title%>">
+      <label for="snippet">Recipe tags:</label>
+      <input type="text" id="snippet" name="snippet" value="<%=blog.snippet%>" required>
+      <label for="body">Ingrideints:</label>
+      <textarea id="body" name="body"required><%=blog.body%></textarea>
+
+      <label for="image">Recipe Image:</label>
+      <input type="text" id="title2" name="imageUrl" value="<%=blog.imageUrl%>" required>
+
+      <!-- <input type="text" hidden="true" id="snippet" name="ownerId" value=<%=user.id%> required >
+      <input type="text" hidden="true" id="snippet" name="ownerEmail" value=<%=user.email%> required > -->
+      <!-- <%-console.log(user.id)-%> -->
+      
+      <button class="frm-btn">Update</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.querySelector('form');
+    
+
+    form.addEventListener('submit', async(e) => {
+    const title=form.title.value
+    const snippet = form.snippet.value
+    const body=form.body.value
+    const imageUrl=form.imageUrl.value
+
+      const res= fetch('/blogs/<%= blog._id%>', {
+         method: 'PUT',
+         body: JSON.stringify({title, snippet,body,imageUrl}),
+         headers: {'Content-Type':'application/json'}
+        })
+        .then(result => result.json())
+        .then(data => {
+            if(data.success)
+            window.location.href = "/blogs/blogsall"
+         })
+        //window.location.href = "/blogs/<%= blog._id%>"
+ });
+ 
+
+  </script>
+  
+  </body>
+  <%- include('partials/footer'); -%>

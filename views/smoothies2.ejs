@@ -1,0 +1,71 @@
+<%- include('partials/header'); %>
+
+
+<body>
+
+  <div class="blogs content">
+    <h2>All-Recipes</h2>
+
+    <ul class="recipes">
+    <% if (blogs.length > 0) { %>
+      <% blogs.forEach(blog => { %>
+        <%-console.log(blog.ownerId)-%>
+
+        <%if(!user){%>
+          <div class="recipe">
+            <img src=<%=blog.imageUrl%> alt="smoothie recipe icon">
+            <!-- <a class="single" href="/blogs/<%= blog._id %>"> -->
+              <h3 class="title">
+                <%= blog.title %>
+              </h3>
+              <p class="snippet">
+                <%= blog.snippet %>
+              </p>
+             
+            </a>
+
+            <!-- <a class="snippet" href="/user/details/<%= blog.ownerEmail %>"> -->
+              <span class="by">By:</span>
+              <%= blog.ownerEmail %>
+            </a>
+
+          </div>
+          
+          <%}%>
+          
+        
+          <%if(user){%>
+
+      
+<div class="recipe">
+    <img src=<%=blog.imageUrl%> alt="smoothie recipe icon">
+     <a class="single" href="/blogs/<%= blog._id %>">
+      <h3 class="title"><%= blog.title %></h3>
+      <p class="snippet"><%= blog.snippet %></p>
+    
+    </a>
+
+    <a class="snippet" href="/user/details/<%= blog.ownerEmail %>">
+      <span class="by">By:</span>
+      <%= blog.ownerEmail %>
+    </a>
+  </div>
+  <%}%>
+         
+
+       
+  
+     
+      <% }) %>
+
+    <% } else { %>
+      <p>There are no blogs to display...</p>
+    <% } %>
+  </ul>
+  </div>
+
+ 
+</body>
+
+
+<%- include('partials/footer'); -%>
