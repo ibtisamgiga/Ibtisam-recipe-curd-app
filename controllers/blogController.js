@@ -40,11 +40,19 @@ const blog_indexall = async (req, res) => {
 
 
 const blog_create_post = async (req, res) => {
+try{
 
     const blog = new Blog(req.body)
     const result = await blog.save()
     console.log(result)
     res.redirect('/blogs')
+
+}catch(err){
+    
+res.send(err.message)
+//res.render('/create',{error:error.message})
+}
+   
 
 }
 
